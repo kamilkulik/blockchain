@@ -2,9 +2,10 @@ import time
 from block import Block
 
 
-class BlochChain:
+class BlockChain:
     def __init__(self) -> None:
         self.chain = [Block(round(time.time() * 1000))]
+        self.difficulty = 1
 
     def get_latest_block(self) -> Block:
         return self.chain[-1]
@@ -12,6 +13,7 @@ class BlochChain:
     def add_block(self, block: Block) -> None:
         block.prev_hash = self.get_latest_block().hash
         block.hash = block.getHash()
+        block.mine(self.difficulty)
         # TODO make the block immutable
         # potentially: https://www.blog.pythonlibrary.org/2014/01/17/how-to-create-immutable-classes-in-python/
         self.chain.append(block)
