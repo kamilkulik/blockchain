@@ -12,7 +12,7 @@ class Block:
 
     def getHash(self):
         return sha256(
-            (str(self.nonce) + self.prev_hash + self.timestamp + json.dumps(self.data)).encode("utf-8")
+            (f"{self.nonce}{self.prev_hash}{self.timestamp}{json.dumps(self.data)}").encode("utf-8")
         ).hexdigest()
 
     def mine(self, difficulty):
